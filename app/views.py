@@ -19,19 +19,19 @@ import MeCab
 
 @app.route('/')
 def show_entries():
-    m = MeCab.Tagger("-Ochasen")
-    string = u'Pythonで作る検索エンジン'
-    string = string.encode("utf-8")
-    node = m.parseToNode(string)
-    a = []
-    while node:
-        a.append(node.surface.decode())
-        node = node.next
+    #m = MeCab.Tagger("-Ochasen")
+    #string = u'Pythonで作る検索エンジン'
+    #string = string.encode("utf-8")
+    #node = m.parseToNode(string)
+    #a = []
+    #while node:
+    #    a.append(node.surface.decode())
+    #    node = node.next
 
     entries = Entry.query.order_by(Entry.id.desc()).all()
     articles = Article.query.order_by(Article.id.desc()).all()
     #test = articles[1]
-    return render_template('show_entries.html', entries=entries, articles=articles, text = a )
+    return render_template('show_entries.html', entries=entries, articles=articles)
 
 @app.route('/show_cook/')
 def show_cook():
