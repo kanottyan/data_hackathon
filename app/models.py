@@ -56,11 +56,10 @@ class User(db.Model):
 
 class Article(db.Model):
     __tablename__ = "articles"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer,primary_key= True)
     content = db.Column(db.Text, default="", nullable = False)
     title = db.Column(db.String(200), default="", nullable = False)
-    category = db.Column(db.String(100), default="", nullable = False)
-    publish_date = db.Column(db.DateTime)
+    publish_date = db.Column(db.Text)
     is_cook = db.Column(db.Integer, default="", nullable = False)
     is_nikkei = db.Column(db.Integer, default="", nullable = False)
 
