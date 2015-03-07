@@ -22,9 +22,9 @@
 
 <div class=page>
     <h1>みんなの就活ニュース</h1>
-        <a href="{{ url_for('show_entries') }}">就活全般</a>
-        <a href="{{ url_for('show_entries') }}">株式会社クックパッド</a>
-        <a href="{{ url_for('show_entries') }}">日系</a>
+        <button type="text" class="btn btn-default"><a href="{{ url_for('show_entries') }}">就活全般</a></button>
+        <button type="text" class="btn btn-default"><a href="{{ url_for('show_cook') }}">株式会社クックパッド</a></button>
+        <button type="text" class="btn btn-default"><a href="{{ url_for('show_nikkei') }}">日本経済新聞社</a></button>
     {% for message in get_flashed_messages() %}
         <div class=flash>{{ message }}</div>
     {% endfor %}

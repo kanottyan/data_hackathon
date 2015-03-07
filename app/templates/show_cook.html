@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <!--form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+    <dl>
+      <dt>Text:
+      <dd><input type=text size=20 name=title>
+      <dt>Text:
+      <dd><textarea name=text rows=5 cols=20></textarea>
+      <dd><input type=submit value=Share>
+    </dl>
+  </form-->
+  <ul class = articles>
+  {% for article in articles %}
+    <li><h2><a href="{{ url_for('article_detail', article_id= article.id) }}">{{article.title}}</a></h2>
+          <li><a href="{{ url_for('article_detail', article_id= article.id) }}">続きを見る...</a>
+        <!--div class = "time">{{ article.publish_date}} </div><br-->
+      <!--  {{ article.content|safe }} -->
+    <hr style="padding-bottom:2px;">
+    {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+
+{% endblock %}

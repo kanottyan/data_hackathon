@@ -15,24 +15,43 @@ from app import app, db
 from app.models import *
 import sys
 import os
+import MeCab
 
 @app.route('/')
 def show_entries():
+    m = MeCab.Tagger("-Ochasen")
+    string = u'Pythonで作る検索エンジン'
+    string = string.encode("utf-8")
+    node = m.parseToNode(string)
+    a = []
+    while node:
+        a.append(node.surface.decode())
+        node = node.next
+
     entries = Entry.query.order_by(Entry.id.desc()).all()
     articles = Article.query.order_by(Article.id.desc()).all()
-    return render_template('show_entries.html', entries=entries, articles=articles )
+    #test = articles[1]
+    return render_template('show_entries.html', entries=entries, articles=articles, text = a )
 
-@app.route('/cook/')
+@app.route('/show_cook/')
 def show_cook():
     articles = Article.query.order_by(Article.id.desc()).all()
     cookpad_articles = Article.query.filter_by(is_cook = 1 ).all()
     return render_template('show_cook.html', articles=cookpad_articles )
 
-@app.route('/nikkei/')
+@app.route('/show_nikkei/')
 def show_nikkei():
     articles = Article.query.order_by(Article.id.desc()).all()
     nikkei_articles = Article.query.filter_by(is_nikkei = 1).all()
     return render_template('show_nikkei.html', articles=nikkei_articles )
+
+@app.route('/article_detail/<int:article_id>/')
+def article_detail(article_id):
+    article = Article.query.get(article_id)
+    #articles = Article.query.order_by(Article.id.desc()).all()
+    #nikkei_articles = Article.query.filter_by(is_nikkei = 1).all()
+    return render_template('article_detail.html', article=article )
+
 
 @app.route('/add', methods=['POST'])
 def add_entry():
