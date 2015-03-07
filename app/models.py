@@ -16,6 +16,7 @@ class Entry(db.Model):
         return '<Entry id={id} title={title!r}>'.format(
                     id=self.id, title=self.title)
 
+
 class User(db.Model):
     __tablename__ = 'users'
     #__table_args__ = {"useexisting": True}
@@ -51,3 +52,17 @@ class User(db.Model):
 
     def __repr__(self):
         return u'<User id={self.id} email={self.email!r}>'.format(self=self)
+
+
+class Article(db.Model):
+    __tablename__ = "articles"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    content = db.Column(db.Text, default="", nullable = False)
+    title = db.Column(db.String(200), default="", nullable = False)
+    category = db.Column(db.String(100), default="", nullable = False)
+    publish_date = db.Column(db.DateTime)
+    is_cook = db.Column(db.Integer, default="", nullable = False)
+    is_nikkei = db.Column(db.Integer, default="", nullable = False)
+
+    def __repr__(self):
+        return 'article: %r, id: %r' % (self.name, self.id)

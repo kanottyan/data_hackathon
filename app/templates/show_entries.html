@@ -3,7 +3,7 @@
 
   <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
     <dl>
-      <dt>Title:
+      <dt>Text:
       <dd><input type=text size=20 name=title>
       <dt>Text:
       <dd><textarea name=text rows=5 cols=20></textarea>
@@ -11,11 +11,15 @@
     </dl>
   </form>
 
-  <ul class=entries>
-  {% for entry in entries %}
-    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
-  {% else %}
+  <ul class = articles>
+  {% for article in articles %}
+    <li><h2>{{ article.title }}</h2>
+        <div class = "time">{{ article.publish_date}} </div><br>
+        {{ article.content|safe }}
+    <hr>
+    {% else %}
     <li><em>Unbelievable.  No entries here so far</em>
   {% endfor %}
   </ul>
+
 {% endblock %}
